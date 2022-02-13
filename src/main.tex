@@ -1,6 +1,9 @@
 \documentclass{simple-article}
 
 \usepackage{amsmath}
+\usepackage{datetime2}
+\usepackage{amro-common}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Add pacakges here
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -12,8 +15,11 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{document}
 \maketitle
+Compilation time: \DTMcurrenttime
+
 Here is a nice linear system of equations
-\begin{align}
-  \mathbf{A} \mathbf{x} & = \mathbf{b}.
-\end{align}
+
+\input{cc.tex}
+There should be some equations above this line.
+
 \end{document}

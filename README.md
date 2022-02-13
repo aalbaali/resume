@@ -10,3 +10,4 @@
 # TODOs
 - Add latex snippets
 - Add aliases
+- Proper Github workflows
