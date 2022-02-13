@@ -1,6 +1,5 @@
 name: CI
 on:
-  commit:
   push:
     paths:
       - .github/workflows/build.yml
