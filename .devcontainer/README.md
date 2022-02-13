@@ -68,3 +68,37 @@ To access a port from your host to your development container, publish a port in
 
 1. In [devcontainer.json](devcontainer.json), change the line `"runServices": ["vscode"],` to `"runServices": ["vscode", "database"],`.
 1. In the VS code command palette, rebuild the container.
+
+# Building LaTeX
+## Source directories
+- Store the `.tex` directories in `src/`
+- Name the main file as `main.tex`. Note that it's possible to rename the generated PDF file by [passing a variable to the `Makefile`](#renaming-the-main-target).
+- The main file may `\include{}` other `.tex` files within `src/`
+
+An example is provided in the `src/` file.
+
+## Makefile
+A `Makefile` is provided for building the latex file.
+
+### Default build
+Running
+```bash
+make
+```
+will
+- generate a `build/main.*` files, including `main.pdf`
+- `main.pdf` will be copied to the workspace root directory
+
+### Renaming the main target
+The main target is named `main` by default. This can be renamed by passing a `JOBNAME` to the `Makefile`. That is,
+```bash
+make JOBNAME=mytarget
+```
+will rename the targets to `mytarget.*` including the PDF file copied to the workspace root directory.
+
+### Clean
+The `Makefile` has a `clean` target that deletes `build/` but keeps the main PDF file in the main root direcotry.
+To clean the directory, run
+```bash
+make clean
+```
