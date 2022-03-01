@@ -1,8 +1,5 @@
 defaults: main.pdf
 
-say_hi: main
-	@echo "\033[92;1mHii\033[0m"
-
 # Building main file
 build_main: src/*.tex
 	@echo "\033[92;1mBuilding '*.tex'\033[0m"
