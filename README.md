@@ -7,6 +7,18 @@
 - This is a Github template, so use the template to create a new repo
 - Write `.tex` files and build (`ctrl + shift + b`)
 
+# Running using Docker
+## Build image
+```bash
+docker build -f Dockerfile -t latex_dev_image  .
+```
+where `latex_dev_image` is the image name, which can be replaced by another image.
+
+## Build latex using non-interactive container
+Run
+```bash
+docker run --rm -it -v $PWD:/home/latex/simple_tex -w=/home/latex/simple_tex  --user latex latex_dev_image  make
+```
 # TODOs
 - Add latex snippets
 - Add aliases

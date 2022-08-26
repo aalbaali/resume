@@ -7,7 +7,7 @@ build_main: src/*.tex
 
 # Copy main pdf to root directory
 main.pdf: build_main
-	cp build/*.pdf .
+	cp build/*.pdf $(shell basename $(CURDIR)).pdf
 
 # Clean
 clean:
