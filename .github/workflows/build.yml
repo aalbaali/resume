@@ -15,7 +15,7 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           context: .
-          file: ./.devcontainer/Dockerfile
+          file: ./Dockerfile
           tags: docker_img:latest
           outputs: type=docker,dest=/tmp/docker_img.tar
 
@@ -62,5 +62,5 @@ jobs:
 
       - name: Build Dockerfile
         run: |
-          docker build -t $GITHUB_REPOSITORY -f ./.devcontainer/Dockerfile .
+          docker build -t $GITHUB_REPOSITORY -f ./Dockerfile .
           docker run --rm -v $GITHUB_WORKSPACE:/workspace -w /workspace docker_img:latest make
