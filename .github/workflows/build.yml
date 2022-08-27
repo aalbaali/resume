@@ -65,3 +65,13 @@ jobs:
           docker build -t docker_img:latest -f ./Dockerfile .
           docker run -v $GITHUB_WORKSPACE:$GITHUB_WORKSPACE -w $GITHUB_WORKSPACE docker_img:latest bash -c 'echo "$PWD"; ls; echo -e "\n\n\n"; sudo find . -name "main\.tex"; latexmk --help; sudo latexmk -cd -pdf src/main.tex'
 
+  docker-build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Run docker
+        using: docker
+        image: docker://Dockerfile
+

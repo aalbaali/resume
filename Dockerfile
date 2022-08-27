@@ -18,4 +18,4 @@ RUN mkdir -p /tmp/custom_latex \
     && chmod +x install_tex.sh \
     && ./install_tex.sh
 
-CMD ["bash"]
+CMD ["bash", "make"]
