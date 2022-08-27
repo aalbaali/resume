@@ -45,7 +45,7 @@ jobs:
       - name: Load Docker and run image
         run: |
           docker load --input /tmp/docker_img.tar
-          docker run docker_img:latest bash -c echo '$PWD' && echo "$ls"
+          docker run docker_img:latest bash -c 'echo "$PWD"; ls; echo -e "\n\n\n"; find . -name "main\.tex"'
 
   # Temporarily keeping this for comparison
   old-build:
@@ -63,5 +63,5 @@ jobs:
       - name: Build Dockerfile
         run: |
           docker build -t docker_img:latest -f ./Dockerfile .
-          docker run latex_dev_image:latest bash -c 'echo "$PWD"; ls; echo -e "\n\n\n"; find . -name "main\.tex"'
+          docker run docker_img:latest bash -c 'echo "$PWD"; ls; echo -e "\n\n\n"; find . -name "main\.tex"'
 
