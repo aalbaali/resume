@@ -45,7 +45,7 @@ jobs:
       - name: Load Docker and run image
         run: |
           docker load --input /tmp/docker_img.tar
-          docker run docker_img:latest bash -c echo '$PWD'; echo "$ls"; make
+          docker run docker_img:latest bash -c echo '$PWD' && echo "$ls"
 
   # Temporarily keeping this for comparison
   old-build:
