@@ -63,4 +63,4 @@ jobs:
       - name: Build Dockerfile
         run: |
           docker build -t $GITHUB_REPOSITORY -f ./Dockerfile .
-          docker run --rm -v $GITHUB_WORKSPACE:/workspace -w /workspace docker_img:latest make
+          docker run --rm docker_img:latest bash -c echo '$PWD' && echo '$ls'
