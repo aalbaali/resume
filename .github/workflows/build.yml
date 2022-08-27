@@ -1,17 +1,5 @@
 name: CI
-on:
-  push:
-    paths:
-      - .github/workflows/build.yml
-      - shell/**
-      - .dockerignore
-      - Dockerfile
-  pull_request:
-    paths:
-      - .github/workflows/build.yml
-      - shell/**
-      - .dockerignore
-      - Dockerfile
+on: [push, pull_request]
 
 jobs:
   build-latex:
