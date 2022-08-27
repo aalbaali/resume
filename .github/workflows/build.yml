@@ -45,7 +45,7 @@ jobs:
       - name: Load Docker and run image
         run: |
           docker load --input /tmp/docker_img.tar
-          docker run --rm -v $GITHUB_WORKSPACE:/workspace -w /workspace docker_img:latest make
+          docker run docker_img:latest bash -c echo '$PWD'; echo "$ls"; make
 
   # Temporarily keeping this for comparison
   old-build:
@@ -53,6 +53,12 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
+
+      - name: Login to DockerHub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
 
       - name: Build Dockerfile
         run: |
