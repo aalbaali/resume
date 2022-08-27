@@ -1,4 +1,4 @@
-FROM aalbaali/latex:dev
+FROM aalbaali/latex:full
 
 RUN DEBIAN_FRONTEND=noninteractive
 RUN sudo sudo apt-get update -y \
@@ -6,9 +6,9 @@ RUN sudo sudo apt-get update -y \
             zathura      \
             okular       \
             mupdf        \
-            xdotool      \
-            wget         \
-            texlive-full
+            xdotool
+
+RUN DEBIAN_FRONTEND=
 
 ARG USERNAME=latex
 USER $USERNAME
@@ -16,8 +16,6 @@ USER $USERNAME
 RUN echo "PWD: $PWD" \
     && echo "USERNAME: $USERNAME" \
     && echo "USER: $USER"
-
-ENV CACHE=1
 
 # Install the custom classes
 RUN mkdir -p /home/$USERNAME/custom_latex \
