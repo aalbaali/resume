@@ -11,4 +11,4 @@ jobs:
       - name: Build Dockerfile
         run: |
           docker build -t $GITHUB_REPOSITORY -f ./.devcontainer/Dockerfile .
-          docker run --rm -v $GITHUB_WORKSPACE:$GITHUB_WORKSPACE -w $GITHUB_WORKSPACE $GITHUB_REPOSITORY  make
+          docker run --rm -v $GITHUB_WORKSPACE:$GITHUB_WORKSPACE -w $GITHUB_WORKSPACE --user latex $GITHUB_REPOSITORY  make
