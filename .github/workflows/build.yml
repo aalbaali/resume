@@ -45,7 +45,7 @@ jobs:
       - name: Load Docker and run image
         run: |
           docker load --input /tmp/docker_img.tar
-          docker run --rm -v $GITHUB_WORKSPACE:$GITHUB_WORKSPACE -w $GITHUB_WORKSPACE \
+          docker run --rm -v $GITHUB_WORKSPACE:$GITHUB_WORKSPACE -w $GITHUB_WORKSPACE --privileged \
              --user latex docker_img:latest  bash -c 'latexmk -cd -pdf --output-directory=../build src/main.tex'
 
   # Temporarily keeping this for comparison
