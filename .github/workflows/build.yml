@@ -63,5 +63,5 @@ jobs:
       - name: Build Dockerfile
         run: |
           docker build -t docker_img:latest -f ./Dockerfile .
-          docker run latex_dev_image:latest bash -c 'echo "$PWD"; ls; echo -e "\n\n\n"; fdfind "main\.tex"'
+          docker run docker_img:latest  bash -c 'echo "$PWD"; ls; echo -e "\n\n\n"; fdfind "main\.tex"'
 
