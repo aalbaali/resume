@@ -12,6 +12,7 @@ jobs:
         run: |
           docker build -t $GITHUB_REPOSITORY -f ./.devcontainer/Dockerfile .
   build-latex:
+    needs: build-dockerfile
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
