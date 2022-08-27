@@ -45,7 +45,8 @@ jobs:
       - name: Load Docker and run image
         run: |
           docker load --input /tmp/docker_img.tar
-          docker run --rm docker_img:latest make
+          docker run --rm -v $GITHUB_WORKSPACE:$GITHUB_WORKSPACE -w $GITHUB_WORKSPACE \
+          docker_img:latest make
 
   # Temporarily keeping this for comparison
   old-build:
