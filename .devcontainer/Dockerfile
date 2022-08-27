@@ -10,10 +10,6 @@ RUN sudo sudo apt-get update -y \
 
 RUN DEBIAN_FRONTEND=
 
-RUN echo "PWD: $PWD" \
-    && echo "USERNAME: $USERNAME" \
-    && echo "USER: $USER"
-
 # Install the custom classes
 RUN mkdir -p /tmp/custom_latex \
     && cd /tmp/custom_latex \
