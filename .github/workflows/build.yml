@@ -11,7 +11,7 @@ jobs:
       - name: Build latex and run make
         run: |
           docker build -t $GITHUB_REPOSITORY -f ./.devcontainer/Dockerfile .
-          docker run --rm -it -v $GITHUB_WORKSPACE:$GITHUB_WORKSPACE -w $GITHUB_WORKSPACE $GITHUB_REPOSITORY  --user latex latex_dev_image  make
+          docker run --rm -v $GITHUB_WORKSPACE:$GITHUB_WORKSPACE -w $GITHUB_WORKSPACE $GITHUB_REPOSITORY  --user latex latex_dev_image  make
 
   verify:
     if: github.event_name == 'pull_request'
