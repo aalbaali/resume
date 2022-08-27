@@ -1,14 +1,14 @@
 FROM aalbaali/latex:dev
 
 RUN DEBIAN_FRONTEND=noninteractive
-RUN sudo apt-get update -y \
-        && apt-get install -y \
-          zathura \
-          okular \
-          mupdf \
-          xdotool \
-          wget \
-          texlive-full
+RUN sudo sudo apt-get update -y \
+        && sudo apt-get install -y \
+            zathura      \
+            okular       \
+            mupdf        \
+            xdotool      \
+            wget         \
+            texlive-full
 
 ARG USERNAME=latex
 USER $USERNAME
