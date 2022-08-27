@@ -25,3 +25,4 @@ RUN mkdir -p /home/$USERNAME/custom_latex \
     && chmod +x install_tex.sh \
     && ./install_tex.sh
 
+CMD ["bash"]
