@@ -2,13 +2,21 @@ name: CI
 on: [push, pull_request]
 
 jobs:
+  build-dockerfile:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      
+      - name: Build Dockerfile
+        run: |
+          docker build -t $GITHUB_REPOSITORY -f ./.devcontainer/Dockerfile .
   build-latex:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
       
-      - name: Build latex and run make
+      - name: Makefile runs latex
         run: |
-          docker build -t $GITHUB_REPOSITORY -f ./.devcontainer/Dockerfile .
           docker run --rm -v $GITHUB_WORKSPACE:$GITHUB_WORKSPACE -w $GITHUB_WORKSPACE $GITHUB_REPOSITORY  make
