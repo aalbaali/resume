@@ -62,5 +62,5 @@ jobs:
 
       - name: Build Dockerfile
         run: |
-          docker build -t $GITHUB_REPOSITORY -f ./Dockerfile .
+          docker build -t docker_img:latest -f ./Dockerfile .
           docker run --rm docker_img:latest bash -c echo '$PWD' && echo '$ls'
