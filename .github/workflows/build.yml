@@ -22,7 +22,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-artifact@v2
         with:
-          name: docker_img:latest
+          name: docker_img
           path: /tmp/docker_img.tar
 
       
@@ -36,7 +36,7 @@ jobs:
       - name: Download artifact
         uses: actions/download-artifact@v2
         with:
-          name: docker_img:latest
+          name: docker_img
           path: /tmp
 
       - name: Load Docker and run image
