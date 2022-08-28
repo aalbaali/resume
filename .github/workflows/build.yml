@@ -1,97 +1,36 @@
 name: CI
-on:
-  push:
-    paths:
-      - .github/workflows/build.yml
-      - shell/**
-      - .dockerignore
-      - Dockerfile
-  pull_request:
-    paths:
-      - .github/workflows/build.yml
-      - shell/**
-      - .dockerignore
-      - Dockerfile
+on: [push, pull_request]
 
 jobs:
-  build-latex:
+  # Temporarily keeping this for comparison
+  latex-local:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-      
-      - name: Build latex and run make
+
+      - name: Build Dockerfile
         run: |
-          docker build -t $GITHUB_REPOSITORY -f ./.devcontainer/Dockerfile .
-          docker run -v $GITHUB_WORKSPACE:$GITHUB_WORKSPACE -w $GITHUB_WORKSPACE $GITHUB_REPOSITORY \
-          bash -c "
-          make 
-          "
+          docker build -t docker_img:latest -f ./.devcontainer/Dockerfile .
+          docker run -v $GITHUB_WORKSPACE:/workspace -w /workspace docker_img:latest make
 
-  verify:
-    if: github.event_name == 'pull_request'
-    runs-on: ubuntu-latest
-    env:
-      DOCKER_BUILDKIT: "1"
-    steps:
-      - uses: actions/checkout@v2
-
-      - name: Build final image
-        run: docker build .
-
-  publish:
-    # needs: [verify]
-    if: github.event_name == 'push'
+  latex-action:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - name: Checkout code
+        uses: actions/checkout@v2
 
-      - uses: docker/setup-qemu-action@v1
-      - uses: docker/setup-buildx-action@v1
-
-      - uses: docker/login-action@v1
+      - name: Build latex
+        uses: aalbaali/latex-action@master
         with:
-          username: qmcgaw
-          password: ${{ secrets.DOCKERHUB_PASSWORD }}
+          root_file: |
+            src/main.tex
+          work_in_root_file_dir: true
 
-      - name: Set variables
-        id: vars
-        run: |
-          BRANCH=${GITHUB_REF#refs/heads/}
-          TAG=${GITHUB_REF#refs/tags/}
-          echo ::set-output name=commit::$(git rev-parse --short HEAD)
-          echo ::set-output name=build_date::$(date -u +%Y-%m-%dT%H:%M:%SZ)
-          if [ "$TAG" != "$GITHUB_REF" ]; then
-            echo ::set-output name=version::$TAG
-            echo ::set-output name=platforms::linux/amd64,linux/arm64
-          elif [ "$BRANCH" = "master" ]; then
-            echo ::set-output name=version::latest
-            echo ::set-output name=platforms::linux/amd64,linux/arm64
-          else
-            echo ::set-output name=version::$BRANCH
-            echo ::set-output name=platforms::linux/amd64,linux/arm64
-          fi
-
-      - name: Build and push scheme-basic image
-        uses: docker/build-push-action@v2
-        with:
-          platforms: ${{ steps.vars.outputs.platforms }}
-          build-args: |
-            BUILD_DATE=${{ steps.vars.outputs.build_date }}
-            COMMIT=${{ steps.vars.outputs.commit }}
-            VERSION=${{ steps.vars.outputs.version }}
-            SCHEME=scheme-basic
-          tags: qmcgaw/latexdevcontainer:${{ steps.vars.outputs.version }}
-          push: true
-
-      - name: Build and push scheme-full image
-        uses: docker/build-push-action@v2
-        with:
-          platforms: ${{ steps.vars.outputs.platforms }}
-          build-args: |
-            BUILD_DATE=${{ steps.vars.outputs.build_date }}
-            COMMIT=${{ steps.vars.outputs.commit }}
-            VERSION=${{ steps.vars.outputs.version }}
-            SCHEME=scheme-full
-          tags: qmcgaw/latexdevcontainer:${{ steps.vars.outputs.version }}-full
-          push: true
+          # Args:
+          #   -cd                 :   Change directory to the root file (this way it can find the cc.tex file)
+          #   -pdf                :   Generate a PDF using pdflatex
+          #   --output-directory  :   Build directory, with respect to the calling command
+          # For more info, refer to
+          #   https://manpages.ubuntu.com/manpages/bionic/man1/latexmk.1L.html
+          args: -cd -pdf --output-directory=../build
