@@ -58,3 +58,16 @@ jobs:
         run: |
           docker build -t docker_img:latest -f ./Dockerfile .
           docker run -v $GITHUB_WORKSPACE:/workspace -w /workspace docker_img:latest make
+
+  latex-action:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Build latex
+        uses: aalbaali/latex-action@v1
+        with:
+          root_file: src/main.tex
+          work_in_root_file_dir: true
+          args: -cd -pdf --output-directory=../build
