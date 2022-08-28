@@ -11,7 +11,7 @@ jobs:
 
       - name: Build Dockerfile
         run: |
-          docker build -t docker_img:latest -f ./Dockerfile .
+          docker build -t docker_img:latest -f ./.devcontainer/Dockerfile .
           docker run -v $GITHUB_WORKSPACE:/workspace -w /workspace docker_img:latest make
 
   latex-action:
