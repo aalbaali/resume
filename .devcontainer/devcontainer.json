@@ -1,42 +1,32 @@
 {
-  "name": "latex-dev",
-  "dockerComposeFile": [
-    "docker-compose.yml"
-  ],
-  "service": "vscode",
-  "runServices": [
-    "vscode"
-  ],
-  "shutdownAction": "stopCompose",
-  "workspaceFolder": "/workspace",
-  "postCreateCommand": "./install_custom_tex_classes.sh",
-  "extensions": [
-    "james-yu.latex-workshop",
-    // Git
-    "eamodio.gitlens",
-    // Other helpers
-    "shardulm94.trailing-spaces",
-    "stkb.rewrap", // rewrap comments after n characters on one line
-    // Other
-    "vscode-icons-team.vscode-icons",
-  ],
-  "settings": {
-    // General settings
-    "files.eol": "\n",
-    // Latex settings
-    "latex-workshop.chktex.enabled": true,
-    "latex-workshop.latex.clean.subfolder.enabled": true,
-    "latex-workshop.latex.autoClean.run": "onBuilt",
-    "editor.formatOnSave": true,
-    "files.associations": {
-      "*.tex": "latex"
-    },
-    "latex-workshop.latexindent.path": "latexindent",
-    "latex-workshop.latexindent.args": [
-      "-c",
-      "%DIR%/",
-      "%TMPFILE%",
-      "-y=defaultIndent: '%INDENT%'"
-    ]
-  }
+	"dockerFile": "Dockerfile",
+	"remoteUser": "root",
+	"runArgs": [
+		"--network=host",
+		"--cap-add=SYS_PTRACE",
+		"--security-opt=apparmor:unconfined",
+		"--volume=/tmp/.X10-unix:/tmp/.X11-unix",
+    "--volume=/home/aa/.ssh:/home/root/.ssh",
+    "--volume=/home/aa/.zsh_history:/home/root/.zsh_history"
+	],
+
+	// Set *default* container specific settings.json values on container create.
+	"settings": {
+		"terminal.integrated.profiles.linux": {
+			"zsh": {
+				"path": "/usr/bin/zsh"
+			}
+		},
+		"terminal.integrated.defaultProfile.linux": "zsh"
+	},
+	"extensions": [
+		"ms-azuretools.vscode-docker",
+		"redhat.vscode-yaml",
+		"streetsidesoftware.code-spell-checker",
+		"twxs.cmake",
+		"yzhang.markdown-all-in-one",
+		"James-Yu.latex-workshop",
+		"torn4dom4n.latex-support",
+		"nickfode.latex-formatter"
+	]
 }

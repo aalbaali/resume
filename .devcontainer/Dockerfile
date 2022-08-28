@@ -1,4 +1,4 @@
-FROM aalbaali/latex:full
+FROM aalbaali/latex:dev
 
 # This is the same Dockerfile used in aalbaali/latex-action
 
@@ -20,7 +20,14 @@ RUN mkdir -p /tmp/custom_latex \
     && chmod +x install_tex.sh \
     && ./install_tex.sh
 
+# Install/update latest packages and install zplug (through zsh-setup)
+RUN cd ~/Dev/workstation_setup \
+      && git pull \
+      && ./scripts/install_packages.sh \
+      && ./scripts/post_install_setup.sh --nvim-setup
+
+
 ENV TZ="Canada/Eastern"
 RUN date
 
-CMD ["bash"]
+CMD ["zsh"]
