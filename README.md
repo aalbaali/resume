@@ -8,6 +8,8 @@
       * [Developing within the Docker container](#developing-within-the-docker-container)
       * [Build latex using non-interactive container](#build-latex-using-non-interactive-container)
     * [Visual Studio Code](#visual-studio-code)
+    * [Running Github Actions locally](#running-github-actions-locally)
+* [Github Actions](#github-actions)
 
 <!-- vim-markdown-toc -->
 
@@ -97,3 +99,24 @@ This is possibly the most convenient option.
 Some notes about building the latex files using VSCode:
 - VSCode will *not* use the Makefile in this directory. Thus, the `latexmk` command may be called differently in VSCode than when calling `make`
 - The default `build` shortcut is `ctrl + shift + b`
+
+### Running Github Actions locally
+There are two [Github actions](#github-actions) in this repo that ensure the pushed latex files are building and catches any errors the user might've missed.
+
+The Github action can be run locally using the [nektos/act](https://github.com/nektos/act) packages, which has two main advantages:
+1. allows for debugging the Github action;
+2. build the latex files locally using the Github actions.
+Buildling the files locally will ensure that whatever is built locally will also be built on the Github servers, which reduces mismatches between the local and on-cloud builds.
+
+For example, to run the `latex-action` action, run
+```bash
+act -a latex-action
+```
+
+# Github Actions
+The repository has two continuous integration Github actions to build the latex code:
+- `latex-action`: builds latex files by running [aalbaali/latex-action](https://github.com/aalbaali/latex-action);
+- `latex-local`: builds latex files using the local [Dockerfile](.devcontainer/Dockerfile).
+
+The `latex-local` pipeline is mainly for testing the files the same way they were developed locally, whereas the `latex-action` uses another Github action to build the files.
+The `latex-action` enforces consistency across different latex repositories.

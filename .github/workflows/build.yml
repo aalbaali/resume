@@ -3,7 +3,7 @@ on: [push, pull_request]
 
 jobs:
   # Temporarily keeping this for comparison
-  old-build:
+  latex-local:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
