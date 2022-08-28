@@ -68,6 +68,8 @@ jobs:
       - name: Build latex
         uses: aalbaali/latex-action@master
         with:
-          root_file: src/main.tex
+          root_file: |
+            src/main.tex
+            src/cc.tex
           #work_in_root_file_dir: true
           #args: -cd -pdf --output-directory=../build
