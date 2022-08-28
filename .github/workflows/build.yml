@@ -70,6 +70,5 @@ jobs:
         with:
           root_file: |
             src/main.tex
-            src/cc.tex
-          #work_in_root_file_dir: true
-          #args: -cd -pdf --output-directory=../build
+          work_in_root_file_dir: true
+          args: -cd -pdf --output-directory=../build
