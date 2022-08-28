@@ -1,6 +1,7 @@
 # LaTeX VSCode Workspace Container
 <!-- vim-markdown-toc GFM -->
 
+* [Overview](#overview)
 * [Usage](#usage)
   * [Building latex files](#building-latex-files)
     * [Makefile](#makefile)
@@ -12,6 +13,8 @@
 * [Github Actions](#github-actions)
 
 <!-- vim-markdown-toc -->
+
+# Overview
 
 This is a Github template for developing and building latex files from within a Docker container.
 The repo has the following features:
