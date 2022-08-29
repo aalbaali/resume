@@ -10,7 +10,6 @@
     "--volume=/home/aa/.zsh_history:/home/root/.zsh_history"
 	],
 
-	// Set *default* container specific settings.json values on container create.
 	"settings": {
 		"terminal.integrated.profiles.linux": {
 			"zsh": {
