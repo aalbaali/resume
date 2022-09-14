@@ -23,7 +23,7 @@ The repo has the following features:
 - The code was originally forked from [qdm12/latexdevcontainer](https://github.com/qdm12/latexdevcontainer) but it heavily deviated from it
 - The repo has `.devcontainer` folder for easier development from within VSCode
 - Github actions that build the latex files on the cloud
-- (Still in development) Upload pdf files to the wiki
+- Upload pdf files to the wiki
 
 # Usage
 - This is a Github template, so it can be used to create a new repo.
@@ -123,3 +123,12 @@ The repository has two continuous integration Github actions to build the latex 
 
 The `latex-local` pipeline is mainly for testing the files the same way they were developed locally, whereas the `latex-action` uses another Github action to build the files.
 The `latex-action` enforces consistency across different latex repositories.
+
+# Wiki
+Whenever pushing the code to any branch, the PDF is built and uploaded to the [Wiki pages](https://github.com/aalbaali/latex_dev_container/wiki).
+The PDFs are versioned using symantic versioning as per the [github-tag-action](https://github.com/mathieudutour/github-tag-action#bumping).
+
+When pushing to the `main` or `release/*` branches, two things happen:
+1. a tag is created for that build, and
+2. the PDF version is bumped as per [github-tag-action bump policy](https://github.com/mathieudutour/github-tag-action#bumping).
+The PDF releases are stored under the [releases page](https://github.com/aalbaali/latex_dev_container/wiki/Releases) and latest page is kept under the [home page](https://github.com/aalbaali/latex_dev_container/wiki).
