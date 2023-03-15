@@ -1,5 +1,13 @@
 name: Build latest
-on: [push, pull_request]
+on:
+  push:
+    branches:
+      - '**'
+      - '!master'
+
+  pull_request:
+    branches:
+      - master
 
 jobs:
   # Temporarily keeping this for comparison
