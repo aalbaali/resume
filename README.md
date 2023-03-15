@@ -29,6 +29,7 @@ The repo has the following features:
 - This is a Github template, so it can be used to create a new repo.
 - Write `.tex` files in the `src` directory.
 - Build the latex files using one of the options below.
+- When forking the repo, ensure that the *Allow all actions and reusable workflows* option is enabled in the forked repo.
 
 ## Building latex files
 There are various ways to build the latex images:
