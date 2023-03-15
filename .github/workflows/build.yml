@@ -54,7 +54,7 @@ jobs:
           fetch-depth: 0
 
       - name: Checkout wiki
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
           repository: ${{ github.repository }}.wiki
           path: wiki
@@ -67,7 +67,7 @@ jobs:
 
       - name: Get current date
         id: date
-        run: echo "::set-output name=date::$(TZ=America/New_York date +'%d-%b-%Y %H:%m')"
+        run: echo "date=$(TZ=America/New_York date +'%d-%b-%Y %H:%m')" >> $GITHUB_OUTPUT
 
       - name: Move and rename pdf
         run: |
@@ -84,8 +84,8 @@ jobs:
           echo \`\`\` >> wiki/Home.md
           echo 'Latest [PDF](data/${{ github.event.repository.name }}.pdf) built on ${{ steps.date.outputs.date }}' >> wiki/Home.md
           cd wiki
-          git config user.name homework-bot
-          git config user.email homework-bot@github.com
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
           git add .
           git commit -m "Update pdf: ${{ github.sha }}" --allow-empty
           git push
