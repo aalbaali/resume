@@ -1,5 +1,9 @@
 name: Deploy release
 on:
+  # TEMPORARILY set these changes
+  pull_request:
+    branches:
+      - master
   push:
     branches:
       - master
