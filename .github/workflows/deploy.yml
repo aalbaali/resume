@@ -97,13 +97,13 @@ jobs:
     runs-on: ubuntu-latest
     needs: latex-action
     steps:
-      - name: Checkout wiki
+      - name: Checkout website
         uses: actions/checkout@v3
         with:
           repository: aalbaali/aalbaali.github.io
           ref: main
           token: ${{ secrets.GH_PAT }}
-          path: _assets
+          path: website
           fetch-depth: 0
 
       - name: Download resume pdf
@@ -113,7 +113,8 @@ jobs:
 
       - name: Move and rename pdf
         run: |
-          mv resume.pdf resume_${{ needs.update-wiki-releases.steps.tag_version.outputs.new_tag  }}.pdf
+          mv main.pdf website/_assets/resume_${{ needs.update-wiki-releases.steps.tag_version.outputs.new_tag  }}.pdf
+          cd website/_assets
           ln -s resume_${{ needs.update-wiki-releases.steps.tag_version.outputs.new_tag  }}.pdf resume.pdf -f
 
       - name: Commit changes
