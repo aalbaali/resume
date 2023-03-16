@@ -103,7 +103,6 @@ jobs:
           repository: aalbaali/aalbaali.github.io
           ref: main
           token: ${{ secrets.GH_PAT }}
-          path: website
           fetch-depth: 0
 
       - name: Download resume pdf
@@ -113,8 +112,8 @@ jobs:
 
       - name: Move and rename pdf
         run: |
-          mv main.pdf website/_assets/resume_${{ needs.update-wiki-releases.steps.tag_version.outputs.new_tag  }}.pdf
-          cd website/_assets
+          mv main.pdf _assets/resume_${{ needs.update-wiki-releases.steps.tag_version.outputs.new_tag  }}.pdf
+          cd _assets
           ln -s resume_${{ needs.update-wiki-releases.steps.tag_version.outputs.new_tag  }}.pdf resume.pdf -f
 
       - name: Commit changes
