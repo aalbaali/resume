@@ -95,14 +95,14 @@ jobs:
   
   update-website:
     runs-on: ubuntu-latest
-    needs: latex-action
+    needs: [latex-action, update-wiki-releases]
     steps:
       - name: Checkout website
         uses: actions/checkout@v3
         with:
           repository: aalbaali/aalbaali.github.io
           ref: main
-          token: ${{ secrets.GH_PAT }}
+          token: ${{ secrets.GITHUB_TOKEN }}
           fetch-depth: 0
 
       - name: Download resume pdf
@@ -123,18 +123,13 @@ jobs:
           git add .
           git checkout -b update-resume-${{  needs.update-wiki-releases.steps.tag_version.outputs.new_tag }}
           git commit -m "Update resume: ${{ steps.tag_version.outputs.new_tag  }}" --allow-empty
-
-      - name: Push changes
-        uses: ad-m/github-push-action@master
-        with:
-          branch: ${{ github.ref }}
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+          git push origin $${ github.ref }
 
       - name: Create a pull request
         uses: peter-evans/create-pull-request@v4
         with:
           repository: aalbaali/aalbaali.github.io
-          token: ${{ secrets.GH_PAT }}
+          token: ${{ secrets.GITHUB_TOKEN }}
           branch: update-resume-${{  needs.update-wiki-releases.steps.tag_version.outputs.new_tag }}
           title: "Update resume"
           body: "This pull request updates the resume published on the page."
