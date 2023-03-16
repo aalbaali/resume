@@ -139,6 +139,7 @@ jobs:
         with:
           token: ${{ secrets.GH_PAT }}
           branch: update-resume-${{  needs.update-wiki-releases.steps.tag_version.outputs.new_tag }}
+          base: main
           title: "Update resume"
           body: "This pull request updates the resume published on the page."
           labels: "automated"
