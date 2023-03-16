@@ -130,7 +130,6 @@ jobs:
           repository: aalbaali/aalbaali.github.io
           github_token: ${{ secrets.GH_PAT }}
           branch: update-resume-${{  needs.update-wiki-releases.steps.tag_version.outputs.new_tag }}
-          ssh: true
 
       - name: Create a pull request
         uses: peter-evans/create-pull-request@v4
