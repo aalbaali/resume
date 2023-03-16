@@ -131,7 +131,7 @@ jobs:
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
           git add .
-          git checkout -b update-resume-$TAG_VERSION
+          git checkout -b update-resume
           git commit -m "Update resume: $TAG_VERSION" --allow-empty
 
       - name: Push changes
@@ -139,14 +139,14 @@ jobs:
         with:
           repository: aalbaali/aalbaali.github.io
           github_token: ${{ secrets.GH_PAT }}
-          branch: update-resume-$TAG_VERSION
+          branch: update-resume
           force: true
 
       - name: Create a pull request
         uses: peter-evans/create-pull-request@v4
         with:
           token: ${{ secrets.GH_PAT }}
-          branch: update-resume-$TAG_VERSION
+          branch: update-resume
           base: main
           title: "Update resume"
           body: "This pull request updates the resume published on the page."
