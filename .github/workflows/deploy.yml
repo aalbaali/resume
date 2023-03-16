@@ -9,6 +9,8 @@ on:
       - master
       - 'releases/**'
 
+permissions: write-all
+
 jobs:
   latex-action:
     runs-on: ubuntu-latest
