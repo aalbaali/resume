@@ -128,14 +128,14 @@ jobs:
         uses: ad-m/github-push-action@master
         with:
           repository: aalbaali/aalbaali.github.io
-          github_token: ${{ secrets.GH_PAT }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
           branch: update-resume-${{  needs.update-wiki-releases.steps.tag_version.outputs.new_tag }}
 
       - name: Create a pull request
         uses: peter-evans/create-pull-request@v4
         with:
           repository: aalbaali/aalbaali.github.io
-          token: ${{ secrets.GH_PAT }}
+          token: ${{ secrets.GITHUB_TOKEN }}
           branch: update-resume-${{  needs.update-wiki-releases.steps.tag_version.outputs.new_tag }}
           title: "Update resume"
           body: "This pull request updates the resume published on the page."
