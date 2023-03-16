@@ -123,7 +123,7 @@ jobs:
           git add .
           git checkout -b update-resume-${{  needs.update-wiki-releases.steps.tag_version.outputs.new_tag }}
           git commit -m "Update resume: ${{ steps.tag_version.outputs.new_tag  }}" --allow-empty
-          git remote set-url --push origin https://aalbaali:${{ secrets.GITHUB_TOKEN }}@github.com/aalbaali/aalbali.github.io
+          git remote set-url --push origin https://aalbaali:${{ secrets.GITHUB_TOKEN }}@github.com/aalbaali/aalbaali.github.io
           git push origin $(git branch --show-current)
 
       - name: Create a pull request
