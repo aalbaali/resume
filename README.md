@@ -124,6 +124,9 @@ The repository has two continuous integration Github actions to build the latex 
 The `latex-local` pipeline is mainly for testing the files the same way they were developed locally, whereas the `latex-action` uses another Github action to build the files.
 The `latex-action` enforces consistency across different latex repositories.
 
+## Deploying to website
+Make sure a Github personal access token `GH_PAT` is generated and is given write permissions in both this repo as well as the [website repo](http://github.com/aalbaali/aalbaali.github.io).
+
 # Wiki
 Whenever pushing the code to any branch, the PDF is built and uploaded to the [Wiki pages](https://github.com/aalbaali/latex_dev_container/wiki).
 The PDFs are versioned using symantic versioning as per the [github-tag-action](https://github.com/mathieudutour/github-tag-action#bumping).
