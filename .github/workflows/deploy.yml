@@ -139,11 +139,10 @@ jobs:
           force: true
 
       - name: Create a pull request
-        uses: peter-evans/create-pull-request@v4
+        uses: peter-evans/create-pull-request@v5-beta
         with:
           token: ${{ secrets.GH_PAT }}
           branch: update-resume
-          branch-suffix: timestamp
           base: main
           title: "Update resume"
           body: "This pull request updates the resume published on the page."
