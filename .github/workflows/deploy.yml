@@ -139,7 +139,7 @@ jobs:
           force: true
 
       - name: Create a pull request
-        uses: peter-evans/create-pull-request@v4
+        uses: peter-evans/create-pull-request@v5-beta
         with:
           token: ${{ secrets.GH_PAT }}
           branch: update-resume
