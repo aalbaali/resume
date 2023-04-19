@@ -3,13 +3,12 @@
 
 * [Overview](#overview)
 * [Usage](#usage)
-  * [Building latex files](#building-latex-files)
-    * [Makefile](#makefile)
-    * [Using Docker](#using-docker)
-      * [Developing within the Docker container](#developing-within-the-docker-container)
-      * [Build latex using non-interactive container](#build-latex-using-non-interactive-container)
-    * [Visual Studio Code](#visual-studio-code)
-    * [Running Github Actions locally](#running-github-actions-locally)
+  * [Makefile](#makefile)
+  * [Using Docker](#using-docker)
+    * [Developing within the Docker container](#developing-within-the-docker-container)
+    * [Build latex using non-interactive container](#build-latex-using-non-interactive-container)
+  * [Visual Studio Code](#visual-studio-code)
+  * [Running Github Actions locally](#running-github-actions-locally)
 * [Github Actions](#github-actions)
 
 <!-- vim-markdown-toc -->
@@ -31,7 +30,6 @@ The repo has the following features:
 - Build the latex files using one of the options below.
 - When forking the repo, ensure that the *Allow all actions and reusable workflows* option is enabled in the forked repo.
 
-## Building latex files
 There are various ways to build the latex images:
 - They can be built on the host machine if latexmk is installed;
 - They can be built using Docker containers non-interactively;
@@ -39,7 +37,7 @@ There are various ways to build the latex images:
 
 The various options are presented below
 
-### Makefile
+## Makefile
 The latex files can be built using the `latexmk` commands, which takes various arguments.
 To simplify it for the user, some of these commands are stored in [`Makefile`](Makefile), which can be called running `make` from the root of this repo.
 The default Make targets will generate the build files in a `build` directory and will copy the pdf file to the root directory and will be renamed to be the directory's basename.
@@ -49,7 +47,7 @@ Thus, there are two ways to use the Makefile:
 1. if `make` and `latexkmk` are installed on the host machine with all required (custom) latex packages/classes, then the Makefile can be used directly;
 2. running the Makefile from a Docker container that has `latexmk` installed with all other required packages (more on this below).
 
-### Using Docker
+## Using Docker
 It's possible to build the latex files in a latex container without running it on your host machine.
 The only requirement is to have Docker installed.
 Some of the advantages of using a Docker container is portability and consistency across all platforms.
@@ -66,7 +64,7 @@ There are generally two ways to do this:
 1. develop within the container;
 2. build the latex files non-interactively
 
-#### Developing within the Docker container
+### Developing within the Docker container
 Running the Docker container interactively will allow you to develop (i.e., write files and build latex files) from within the container.
 To run the container, run (from the repo's root)
 ```bash
@@ -84,7 +82,7 @@ However, other changes outside this directory (from either host or the container
 
 - The files built from within this container are built using `root` user. Thus, eleveated privileges are required to modify these files from *host*, including deleting them. This can be done by prepending the commands with `sudo`.
 
-#### Build latex using non-interactive container
+### Build latex using non-interactive container
 It's possible to build the latex files without going inside the container by running
 ```bash
 docker run --rm -v $PWD:/home/latex/simple_tex -w=/home/latex/simple_tex  --user latex latex_dev_image  make
@@ -92,7 +90,7 @@ docker run --rm -v $PWD:/home/latex/simple_tex -w=/home/latex/simple_tex  --user
 The command above calls `make` from within the container, which will build the latex files.
 The files will be visible by the host machine since the directory is mounted to the container.
 
-### Visual Studio Code
+## Visual Studio Code
 Visual Studio Code has useful features to interact with Docker images and containers.
 [This page](https://code.visualstudio.com/docs/remote/containers) outlines how VSCode interacts with Dockerfiles.
 
@@ -104,7 +102,7 @@ Some notes about building the latex files using VSCode:
 - VSCode will *not* use the Makefile in this directory. Thus, the `latexmk` command may be called differently in VSCode than when calling `make`
 - The default `build` shortcut is `ctrl + shift + b`
 
-### Running Github Actions locally
+## Running Github Actions locally
 There are two [Github actions](#github-actions) in this repo that ensure the pushed latex files are building and catches any errors the user might've missed.
 
 The Github action can be run locally using the [nektos/act](https://github.com/nektos/act) packages, which has two main advantages:
