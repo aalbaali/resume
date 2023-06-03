@@ -1,5 +1,13 @@
 name: Build latest
-on: [push, pull_request]
+on:
+  push:
+    branches:
+      - '**'
+      - '!master'
+
+  pull_request:
+    branches:
+      - master
 
 jobs:
   # Temporarily keeping this for comparison
@@ -54,7 +62,7 @@ jobs:
           fetch-depth: 0
 
       - name: Checkout wiki
-        uses: actions/checkout@v3
+        uses: actions/checkout@v2
         with:
           repository: ${{ github.repository }}.wiki
           path: wiki
@@ -84,8 +92,8 @@ jobs:
           echo \`\`\` >> wiki/Home.md
           echo 'Latest [PDF](data/${{ github.event.repository.name }}.pdf) built on ${{ steps.date.outputs.date }}' >> wiki/Home.md
           cd wiki
-          git config --local user.email "action@github.com"
-          git config --local user.name "GitHub Action"
+          git config user.name homework-bot
+          git config user.email homework-bot@github.com
           git add .
           git commit -m "Update pdf: ${{ github.sha }}" --allow-empty
           git push
