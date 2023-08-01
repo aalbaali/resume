@@ -135,14 +135,14 @@ jobs:
         with:
           repository: aalbaali/aalbaali.github.io
           github_token: ${{ secrets.GH_PAT }}
-          branch: update-resume-$TAG_VERSION
+          branch: update-resume-${{ needs.update-wiki-releases.outputs.tag_version }}
           force: true
 
       - name: Create a pull request
         uses: peter-evans/create-pull-request@v5
         with:
           token: ${{ secrets.GH_PAT }}
-          branch: update-resume-$TAG_VERSION
+          branch: update-resume-${{ needs.update-wiki-releases.outputs.tag_version }}
           branch-suffix: timestamp
           base: main
           title: "Update resume"
