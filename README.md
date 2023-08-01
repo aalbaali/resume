@@ -71,7 +71,7 @@ To run the container, run (from the repo's root)
 ```bash
 docker run --rm -it -v $PWD:/home/latex/simple_tex -w=/home/latex/simple_tex  latex_dev_image
 ```
-Since `make` and `latexmk` are both installed in the Docker container, then it's possible to use the `Makefil` by running
+Since `make` and `latexmk` are both installed in the Docker container, then it's possible to use the `Makefile` by running
 ```bash
 $ make
 ```
@@ -86,7 +86,7 @@ However, other changes outside this directory (from either host or the container
 #### Build latex using non-interactive container
 It's possible to build the latex files without going inside the container by running
 ```bash
-docker run --rm -v $PWD:/home/latex/simple_tex -w=/home/latex/simple_tex  --user latex latex_dev_image  make
+docker run --rm -v $PWD:/workspace -w /workspace aalbaali/latex:dev make
 ```
 The command above calls `make` from within the container, which will build the latex files.
 The files will be visible by the host machine since the directory is mounted to the container.
