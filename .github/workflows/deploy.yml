@@ -143,7 +143,6 @@ jobs:
         with:
           token: ${{ secrets.GH_PAT }}
           branch: update-resume-${{ needs.update-wiki-releases.outputs.tag_version }}
-          branch-suffix: timestamp
           base: main
           title: "Update resume"
           body: "This pull request updates the resume published on the page."
