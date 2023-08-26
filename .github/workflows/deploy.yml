@@ -127,7 +127,7 @@ jobs:
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
           git add .
-          git checkout -b update-resume
+          git checkout -b update-resume-${{ needs.update-wiki-releases.outputs.tag_version }}
           git commit -m "Update resume: $TAG_VERSION" --allow-empty
 
       - name: Push changes
